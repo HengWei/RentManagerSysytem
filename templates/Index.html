@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     {% load staticfiles %}
     <meta charset="utf-8">
@@ -11,6 +11,15 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>房屋出租管理系統</title>
+
+    <!--jquery-->
+    <script src="{% static "js/jquery-3.2.0.min.js" %}"></script>
+    <!-- heighchart js-->
+    {#    <script src="{% static "js/highcharts.js" %}"></script>#}
+    {#    <script src="{% static "js/jquery-ui.min.js" %}"></script>#}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
 
     <!-- Bootstrap core CSS -->
     {#    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">#}
@@ -26,12 +35,331 @@
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
 
+
+    {#    <link href="{% static "css/dashboard.css" %}" rel="stylesheet">#}
+    {#    <link href="{% static "css/jquery-ui.min.css" %}" rel="stylesheet">#}
+
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+<script>
+    $(function () {
+        var myChart = // Create the chart
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: '各室電費狀態'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    type: 'category'
+                },
+                yAxis: {
+                    title: {
+                        text: '度數'
+                    }
+
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y:.2f}度'
+                        }
+                    }
+                },
+
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+                },
+
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: [{
+                        name: '1號',
+                        y: 56.33,
+                        drilldown: 'Microsoft Internet Explorer'
+                    }, {
+                        name: '2號',
+                        y: 24.03,
+                        drilldown: 'Chrome'
+                    }, {
+                        name: 'Firefox',
+                        y: 10.38,
+                        drilldown: 'Firefox'
+                    }, {
+                        name: 'Safari',
+                        y: 4.77,
+                        drilldown: 'Safari'
+                    }, {
+                        name: 'Opera',
+                        y: 0.91,
+                        drilldown: 'Opera'
+                    }, {
+                        name: 'Proprietary or Undetectable',
+                        y: 0.2,
+                        drilldown: null
+                    }]
+                }],
+                drilldown: {
+                    series: [{
+                        name: 'Microsoft Internet Explorer',
+                        id: 'Microsoft Internet Explorer',
+                        data: [
+                            [
+                                'v11.0',
+                                24.13
+                            ],
+                            [
+                                'v8.0',
+                                17.2
+                            ],
+                            [
+                                'v9.0',
+                                8.11
+                            ],
+                            [
+                                'v10.0',
+                                5.33
+                            ],
+                            [
+                                'v6.0',
+                                1.06
+                            ],
+                            [
+                                'v7.0',
+                                0.5
+                            ]
+                        ]
+                    }, {
+                        name: 'Chrome',
+                        id: 'Chrome',
+                        data: [
+                            [
+                                'v40.0',
+                                5
+                            ],
+                            [
+                                'v41.0',
+                                4.32
+                            ],
+                            [
+                                'v42.0',
+                                3.68
+                            ],
+                            [
+                                'v39.0',
+                                2.96
+                            ],
+                            [
+                                'v36.0',
+                                2.53
+                            ],
+                            [
+                                'v43.0',
+                                1.45
+                            ],
+                            [
+                                'v31.0',
+                                1.24
+                            ],
+                            [
+                                'v35.0',
+                                0.85
+                            ],
+                            [
+                                'v38.0',
+                                0.6
+                            ],
+                            [
+                                'v32.0',
+                                0.55
+                            ],
+                            [
+                                'v37.0',
+                                0.38
+                            ],
+                            [
+                                'v33.0',
+                                0.19
+                            ],
+                            [
+                                'v34.0',
+                                0.14
+                            ],
+                            [
+                                'v30.0',
+                                0.14
+                            ]
+                        ]
+                    }, {
+                        name: 'Firefox',
+                        id: 'Firefox',
+                        data: [
+                            [
+                                'v35',
+                                2.76
+                            ],
+                            [
+                                'v36',
+                                2.32
+                            ],
+                            [
+                                'v37',
+                                2.31
+                            ],
+                            [
+                                'v34',
+                                1.27
+                            ],
+                            [
+                                'v38',
+                                1.02
+                            ],
+                            [
+                                'v31',
+                                0.33
+                            ],
+                            [
+                                'v33',
+                                0.22
+                            ],
+                            [
+                                'v32',
+                                0.15
+                            ]
+                        ]
+                    }, {
+                        name: 'Safari',
+                        id: 'Safari',
+                        data: [
+                            [
+                                'v8.0',
+                                2.56
+                            ],
+                            [
+                                'v7.1',
+                                0.77
+                            ],
+                            [
+                                'v5.1',
+                                0.42
+                            ],
+                            [
+                                'v5.0',
+                                0.3
+                            ],
+                            [
+                                'v6.1',
+                                0.29
+                            ],
+                            [
+                                'v7.0',
+                                0.26
+                            ],
+                            [
+                                'v6.2',
+                                0.17
+                            ]
+                        ]
+                    }, {
+                        name: 'Opera',
+                        id: 'Opera',
+                        data: [
+                            [
+                                'v12.x',
+                                0.34
+                            ],
+                            [
+                                'v28',
+                                0.24
+                            ],
+                            [
+                                'v27',
+                                0.17
+                            ],
+                            [
+                                'v29',
+                                0.16
+                            ]
+                        ]
+                    }]
+                }
+            });
+        Highcharts.chart('container2', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Browser market shares January, 2015 to May, 2015'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [{
+                    name: 'Microsoft Internet Explorer',
+                    y: 56.33
+                }, {
+                    name: 'Chrome',
+                    y: 24.03,
+                    sliced: true,
+                    selected: true
+                }, {
+                    name: 'Firefox',
+                    y: 10.38
+                }, {
+                    name: 'Safari',
+                    y: 4.77
+                }, {
+                    name: 'Opera',
+                    y: 0.91
+                }, {
+                    name: 'Proprietary or Undetectable',
+                    y: 0.2
+                }]
+            }]
+        });
+
+    });
+
+</script>
+<style>
+    .nav-sidebar {
+        font-size: large;
+
+    }
+
+</style>
 
 <body>
 
@@ -54,9 +382,9 @@
                 <li><a href="#">個人資訊</a></li>
                 <li><a href="#">幫助</a></li>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
+{#            <form class="navbar-form navbar-right">#}
+{#                <input type="text" class="form-control" placeholder="Search...">#}
+{#            </form>#}
         </div>
     </div>
 </nav>
@@ -65,60 +393,68 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">快速導覽 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">報表</a></li>
-                <li><a href="#">Analytics</a></li>
-                <li><a href="#">匯出</a></li>
+                <li class="active"><a href="#"><apan class="glyphicon glyphicon-dashboard" aria-hidden="true"/>
+                    綜合資訊 <span class="sr-only">(current)</span></a></li>
+                <li><a href="">
+                    <apan class="glyphicon glyphicon-flash" aria-hidden="true"/>
+                    電費資訊</a></li>
+                <li><a href="">
+                    <apan class="glyphicon glyphicon-user" aria-hidden="true"/>
+                    承租人資訊</a></li>
+                <li><a href="">
+                    <apan class="glyphicon glyphicon-home" aria-hidden="true"/>
+                    房間資訊</a></li>
+                <li><a href="">
+                    <apan class="glyphicon glyphicon-file" aria-hidden="true"/>
+                    合約</a></li>
             </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="">電費報表</a></li>
-                <li><a href="">電表抄錶</a></li>
-                <li><a href="">列印電費明細</a></li>
-                <li><a href="">Another nav item</a></li>
-                <li><a href="">More navigation</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="">承租人資料</a></li>
-                <li><a href="">承租人清單</a></li>
-                <li><a href="">Another nav item</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="">房間狀態</a></li>
-                <li><a href="">更換承租人</a></li>
-                <li><a href="">Another nav item</a></li>
-            </ul>
+{#            <ul class="nav nav-sidebar">#}
+{#                <li><a href="">電表抄錶</a></li>#}
+{#                <li><a href="">列印電費明細</a></li>#}
+{#                <li><a href="">Another nav item</a></li>#}
+{#                <li><a href="">More navigation</a></li>#}
+{#            </ul>#}
+{#            <ul class="nav nav-sidebar">#}
+{##}
+{#                <li><a href="">承租人清單</a></li>#}
+{#                <li><a href="">Another nav item</a></li>#}
+{#            </ul>#}
+{#            <ul class="nav nav-sidebar">#}
+{#                <li><a href="">房間狀態</a></li>#}
+{#                <li><a href="">更換承租人</a></li>#}
+{#                <li><a href="">Another nav item</a></li>#}
+{#            </ul>#}
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">用電統計</h1>
-{##}
-{#            <div class="row placeholders">#}
-{#                <div class="col-xs-6 col-sm-3 placeholder">#}
-{#                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="#}
-{#                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">#}
-{#                    <h4>Label</h4>#}
-{#                    <span class="text-muted">Something else</span>#}
-{#                </div>#}
-{#                <div class="col-xs-6 col-sm-3 placeholder">#}
-{#                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="#}
-{#                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">#}
-{#                    <h4>Label</h4>#}
-{#                    <span class="text-muted">Something else</span>#}
-{#                </div>#}
-{#                <div class="col-xs-6 col-sm-3 placeholder">#}
-{#                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="#}
-{#                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">#}
-{#                    <h4>Label</h4>#}
-{#                    <span class="text-muted">Something else</span>#}
-{#                </div>#}
-{#                <div class="col-xs-6 col-sm-3 placeholder">#}
-{#                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="#}
-{#                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">#}
-{#                    <h4>Label</h4>#}
-{#                    <span class="text-muted">Something else</span>#}
-{#                </div>#}
-{#            </div>#}
+            <h1 class="page-header">狀態一覽</h1>
+            <div class="row placeholders">
+                <div class="col-xs-12 col-sm-6 placeholder">
+                    <div id="container" style="width:100%; height:400px;"></div>
+                </div>
+                <div class="col-xs-12 col-sm-6 placeholder">
+                    <div id="container2" style="width:100%; height:400px;"></div>
+                </div>
+                {#                <div class="col-xs-6 col-sm-3 placeholder">#}
+                {#                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="#}
+                {#                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">#}
+                {#                    <h4>Label</h4>#}
+                {#                    <span class="text-muted">Something else</span>#}
+                {#                </div>#}
+                {#                <div class="col-xs-6 col-sm-3 placeholder">#}
+                {#                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="#}
+                {#                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">#}
+                {#                    <h4>Label</h4>#}
+                {#                    <span class="text-muted">Something else</span>#}
+                {#                </div>#}
+                {#                <div class="col-xs-6 col-sm-3 placeholder">#}
+                {#                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="#}
+                {#                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">#}
+                {#                    <h4>Label</h4>#}
+                {#                    <span class="text-muted">Something else</span>#}
+                {#                </div>#}
+            </div>
 
-            <h2 class="sub-header">Section title</h2>
+            <h2 class="sub-header">房間資訊</h2>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -135,8 +471,8 @@
                         <td>1號</td>
                         <td>小倉唯</td>
                         <td>2017/05/06</td>
-                        <td><p style="color: forestgreen">承租中</p> </td>
-                        <td><p style="color: red" >欠費中</p></td>
+                        <td><p style="color: forestgreen">承租中</p></td>
+                        <td><p style="color: red">欠費中</p></td>
                     </tr>
                     <tr>
                         <td>2號</td>
@@ -145,7 +481,6 @@
                         <td><p style="color: forestgreen">承租中</p></td>
                         <td><p style="color: forestgreen">已繳清</p></td>
                     </tr>
-
                     </tbody>
                 </table>
             </div>
