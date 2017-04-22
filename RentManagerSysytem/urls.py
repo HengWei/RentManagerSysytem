@@ -16,10 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 # from django.contrib import admin
 from MainDashboard.views import TestApp
+from ViewStatus.views import ViewStatus
 
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     url(r'^test/', TestApp),
+    url(r'^viewstatus/', ViewStatus),
 
 ]
