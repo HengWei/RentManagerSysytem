@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.db import connection
 
 
 # Create your models here.
@@ -105,3 +106,55 @@ class DjangoMigrations(models.Model):
         managed = False
         db_table = 'django_migrations'
         app_label = 'MainDashboard'
+
+
+class InfoGet(models.Manager):
+    def GetRoomOverView(self):
+        curosr = connection.cursor()
+        sqlStr = '''
+         SELECT Room.roomName, IFNULL(Users.userName,'') as userName
+        , IFNULL(DATE_FORMAT(contractEndDate, '%Y-%m-%d') ,'') as endData
+        , CASE WHEN Contract.contractId IS NULL THEN 0 ELSE 1 END as roomStatus
+        FROM Room 
+        LEFT JOIN Contract ON Contract.roomId=Room.roomId AND  Contract.contractStartDate < NOW() AND contractEndDate> NOW() 
+        LEFT JOIN Users ON Contract.userId=Users.userId
+        WHERE Room.roomManagersId=1 
+        '''
+        curosr.execute(sqlStr)
+        fetchall = curosr.fetchall()
+        result = []
+        for obj in fetchall:
+            dic = {}
+            dic['roomName'] = obj[0]
+            dic['userName'] = obj[1]
+            dic['endDate'] = obj[2]
+            dic['roomStatus'] = obj[3]
+            result.append(dic)
+        return result
+
+    def GetRoomElectView(self):
+        curosr = connection.cursor()
+        sqlStr = '''
+         SELECT Room.roomName, IFNULL(Users.userName,'') as userName
+        , IFNULL(DATE_FORMAT(contractEndDate, '%Y-%m-%d') ,'') as endData
+        , CASE WHEN Contract.contractId IS NULL THEN 0 ELSE 1 END as roomStatus
+        FROM Room 
+        LEFT JOIN Contract ON Contract.roomId=Room.roomId AND  Contract.contractStartDate < NOW() AND contractEndDate> NOW() 
+        LEFT JOIN Users ON Contract.userId=Users.userId
+        WHERE Room.roomManagersId=1 
+        '''
+        curosr.execute(sqlStr)
+        fetchall = curosr.fetchall()
+        result = []
+        for obj in fetchall:
+            dic = {}
+            dic['roomName'] = obj[0]
+            dic['userName'] = obj[1]
+            dic['endDate'] = obj[2]
+            dic['roomStatus'] = obj[3]
+            result.append(dic)
+        return result
+
+
+class Info(models.Model):
+    object = InfoGet()

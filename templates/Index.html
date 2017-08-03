@@ -351,24 +351,22 @@
         });
 
 
-
-
     });
-function removeManual(active) {
-            $('#ele').removeClass('active');
-            $('#info').removeClass('active');
-            $(active).addClass('active');
-            switch (active){
-                case '#ele':
-                    $('#mainFrame').attr('src','../viewstatus/');
-                    break;
-                case '#info':
-                    $('#mainFrame').attr('src','../viewstatus/');
-                    break;
-                default:
+    function removeManual(active) {
+        $('#ele').removeClass('active');
+        $('#info').removeClass('active');
+        $(active).addClass('active');
+        switch (active) {
+            case '#ele':
+                $('#mainFrame').attr('src', '../viewstatus/');
+                break;
+            case '#info':
+                $('#mainFrame').attr('src', '../viewstatus/');
+                break;
+            default:
 
-            }
         }
+    }
 </script>
 <style>
     .nav-sidebar {
@@ -382,69 +380,91 @@ function removeManual(active) {
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="../test/">出租管理系統</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">快速導覽</a></li>
-                <li><a href="#">設定</a></li>
-                <li><a href="#">個人資訊</a></li>
-                <li><a href="#">幫助</a></li>
-            </ul>
-{#            <form class="navbar-form navbar-right">#}
-{#                <input type="text" class="form-control" placeholder="Search...">#}
-{#            </form>#}
-        </div>
+        {% include 'TopBar.html' %}
     </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container theme-showcase" role="main">
     <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li id="info" class="active"><a href="javascript: removeManual('#info');"><apan class="glyphicon glyphicon-dashboard" aria-hidden="true"/>
-                    綜合資訊 <span class="sr-only">(current)</span></a></li>
-                <li id="ele" ><a id="elea" href="javascript: removeManual('#ele');">
-                    <apan class="glyphicon glyphicon-flash" aria-hidden="true"/>
-                    電費資訊</a></li>
-                <li><a href="#">
-                    <apan class="glyphicon glyphicon-user" aria-hidden="true"/>
-                    承租人資訊</a></li>
-                <li><a href="#">
-                    <apan class="glyphicon glyphicon-home" aria-hidden="true"/>
-                    房間資訊</a></li>
-                <li><a href="#">
-                    <apan class="glyphicon glyphicon-file" aria-hidden="true"/>
-                    合約</a></li>
-            </ul>
-{#            <ul class="nav nav-sidebar">#}
-{#                <li><a href="">電表抄錶</a></li>#}
-{#                <li><a href="">列印電費明細</a></li>#}
-{#                <li><a href="">Another nav item</a></li>#}
-{#                <li><a href="">More navigation</a></li>#}
-{#            </ul>#}
-{#            <ul class="nav nav-sidebar">#}
-{##}
-{#                <li><a href="">承租人清單</a></li>#}
-{#                <li><a href="">Another nav item</a></li>#}
-{#            </ul>#}
-{#            <ul class="nav nav-sidebar">#}
-{#                <li><a href="">房間狀態</a></li>#}
-{#                <li><a href="">更換承租人</a></li>#}
-{#                <li><a href="">Another nav item</a></li>#}
-{#            </ul>#}
+        <h1 class="page-header">狀態一覽</h1>
+        <div class="row placeholders">
+            <div class="col-xs-12 col-sm-6 placeholder">
+                <div id="container" style="width:100%; height:400px;"></div>
+            </div>
+            <div class="col-xs-12 col-sm-6 placeholder">
+                <div id="container2" style="width:100%; height:400px;"></div>
+            </div>
+            {#                <div class="col-xs-6 col-sm-3 placeholder">#}
+            {#                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="#}
+            {#                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">#}
+            {#                    <h4>Label</h4>#}
+            {#                    <span class="text-muted">Something else</span>#}
+            {#                </div>#}
+            {#                <div class="col-xs-6 col-sm-3 placeholder">#}
+            {#                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="#}
+            {#                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">#}
+            {#                    <h4>Label</h4>#}
+            {#                    <span class="text-muted">Something else</span>#}
+            {#                </div>#}
+            {#                <div class="col-xs-6 col-sm-3 placeholder">#}
+            {#                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="#}
+            {#                         width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">#}
+            {#                    <h4>Label</h4>#}
+            {#                    <span class="text-muted">Something else</span>#}
+            {#                </div>#}
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <iframe id="mainFrame" src="../viewstatus/" frameborder="0" width="100%" height="680"></iframe>
+
+        <h2 class="sub-header">房間資訊</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>房間名稱</th>
+                    <th>承租人</th>
+                    <th>合約到期日</th>
+                    <th>出租狀態</th>
+                    <th>繳款狀況</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in data %}
+                    <tr>
+                        <td>{{ item.roomName }}</td>
+                        <td>{{ item.userName }}</td>
+                        <td>{{ item.endDate }}</td>
+                        {% if item.roomStatus %}
+                            <td><p style="color: forestgreen">承租中</p></td>
+                        {% else %}
+                            <td><p style="color: red">閒置中</p></td>
+                        {% endif %}
+                        <td><p style="color: red">欠費中</p></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
+        {#        <div class="col-sm-3 col-md-2 sidebar">#}
+        {#            {% include 'LeftBar.html' %}#}
+        {#            <ul class="nav nav-sidebar">#}
+        {#                <li><a href="">電表抄錶</a></li>#}
+        {#                <li><a href="">列印電費明細</a></li>#}
+        {#                <li><a href="">Another nav item</a></li>#}
+        {#                <li><a href="">More navigation</a></li>#}
+        {#            </ul>#}
+        {#            <ul class="nav nav-sidebar">#}
+        {##}
+        {#                <li><a href="">承租人清單</a></li>#}
+        {#                <li><a href="">Another nav item</a></li>#}
+        {#            </ul>#}
+        {#            <ul class="nav nav-sidebar">#}
+        {#                <li><a href="">房間狀態</a></li>#}
+        {#                <li><a href="">更換承租人</a></li>#}
+        {#                <li><a href="">Another nav item</a></li>#}
+        {#            </ul>#}
+        {#        </div>#}
+        {#        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">#}
+        {#            <iframe id="mainFrame" src="../viewstatus/" frameborder="0" width="100%" height="680"></iframe>#}
+        {#        </div>#}
     </div>
 </div>
 
